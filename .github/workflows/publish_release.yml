@@ -120,12 +120,20 @@ jobs:
             );
             return await script({github, context});
 
+       - name: Parse semver string
+         id: parse_semver 
+         uses: booxmedialtd/ws-action-parse-semver@v1
+         with:
+           input_string: ${{ steps.bump_version_dev.outputs.new_version }}
+           version_extractor_regex: '\/v(.*)$'
+
+
       - name: Create Pull Request
         id: cpr_bump_dev
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Version bump to ${{ steps.bump_version_dev.outputs.new_version }}
+          commit-message: ${{steps.semver_parser.outputs.major}} Version bump to ${{ steps.bump_version_dev.outputs.new_version }}
           title: Version bump to ${{ steps.bump_version_dev.outputs.new_version }}
           body: |
             This is an automated PR.
