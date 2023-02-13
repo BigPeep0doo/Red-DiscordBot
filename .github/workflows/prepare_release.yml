@@ -112,8 +112,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[v${{ steps.semver_parser.outputs.major }}] Version bump to ${{ steps.bump_version_stable.outputs.new_version }}"
-          title: "[v${{ steps.semver_parser.outputs.major }}] Version bump to ${{ steps.bump_version_stable.outputs.new_version }}"
+          commit-message: "[v${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}] Version bump to ${{ steps.bump_version_stable.outputs.new_version }}"
+          title: "[${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}] Version bump to ${{ steps.bump_version_stable.outputs.new_version }}"
           body: |
             This is an automated PR that is part of Prepare Release automated workflow (1 out of 2).
             Please ensure that there are no errors or invalid files are in the PR.
