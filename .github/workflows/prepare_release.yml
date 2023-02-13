@@ -105,7 +105,7 @@ jobs:
         id: semver_parser 
         uses: booxmedialtd/ws-action-parse-semver@v1.4.7
         with:
-          input_string: ${{ steps.bump_version_stable.outputs.new_version }}
+          input_string: "3.5.0"
           version_extractor_regex: '^\d+\.\d+\.\d+$'
 
       - name: Create Pull Request
