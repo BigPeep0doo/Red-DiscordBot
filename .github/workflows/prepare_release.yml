@@ -106,7 +106,7 @@ jobs:
         uses: booxmedialtd/ws-action-parse-semver@v1.4.7
         with:
           input_string: ${{ steps.bump_version_stable.outputs.new_version }}
-          version_extractor_regex: '^(\d+\.\d+)'
+          version_extractor_regex: '^[0-9]+\.[0-9]+\.[0-9]+$'
 
       - name: Create Pull Request
         id: cpr_bump_stable
