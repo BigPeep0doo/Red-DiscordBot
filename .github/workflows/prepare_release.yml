@@ -107,13 +107,6 @@ jobs:
         with:
           input_string: 3.5.0
 
-      - name: Bump Version Stable
-        id: bump_version_stable
-        uses: docker://docker.io/actions/version-bump-action:v1.0.1
-        with:
-          semver_input: ${{ steps.semver_parser.outputs.full_version }}
-          bump: patch
-
       - name: Create Pull Request
         id: cpr_bump_stable
         uses: peter-evans/create-pull-request@v4
