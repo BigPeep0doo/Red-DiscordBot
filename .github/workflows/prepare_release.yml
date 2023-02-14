@@ -105,7 +105,7 @@ jobs:
         id: semver_parser
         uses: booxmedialtd/ws-action-parse-semver@v1.4.7
         with:
-          input_string: 3.5.0
+          input_string: ${{ steps.bump_version_stable.outputs.new_version }}
 
       - name: Create Pull Request
         id: cpr_bump_stable
