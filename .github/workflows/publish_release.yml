@@ -122,9 +122,17 @@ jobs:
 
       - name: Extract Semver
         id: semver_parser
-        uses: booxmedialtd/ws-action-parse-semver@v1.4.7
+        uses: actions/github-script@v6
         with:
-          input_string: ${{ steps.bump_version_stable.outputs.new_version }}
+          script: |
+            const regex = /(\d+)\.(\d+)\.(\d+)/;
+            const match = regex.exec('${{ steps.bump_version_stable.outputs.new_version }}');
+            return {
+              major: match[1],
+              minor: match[2],
+              patch: match[3]
+            }
+
 
       - name: Create Pull Request
         id: cpr_bump_dev
