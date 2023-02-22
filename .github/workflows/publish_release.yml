@@ -122,9 +122,19 @@ jobs:
 
       - name: Extract Semver
         id: semver_parser
-        uses: booxmedialtd/ws-action-parse-semver@v1.4.7
+        #if: startsWith(steps.bump_version_stable.outputs.new_version, '3.')
+        uses: actions/github-script@v6
         with:
-          input_string: ${{ steps.bump_version_stable.outputs.new_version }}
+          result-encoding: string
+          script: |
+            const semver = require('semver');
+            const semverString = "${{ steps.bump_version_stable.outputs.new_version }}";
+            if(semverString.startsWith("3.")){
+              return semver.coerce(semverString);
+            }
+            else{
+              return "";
+            }
 
       - name: Create Pull Request
         id: cpr_bump_dev
